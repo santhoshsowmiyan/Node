@@ -1,0 +1,64 @@
+class Node:
+    def __init__(self,Data):
+        self.data = Data
+        self.next = None
+        
+class link_list:
+    def insert_head(self,new_data):
+        tempNode= Node(new_data)
+        tempNode.next = self.head
+        self.head = tempNode
+        
+    def insert_mid(self,MidData,new_data):
+        tempNode = Node(new_data)
+        tempNode.next = MidData.next 
+        MidData.next = tempNode
+    
+    def remove(self,remove_data):
+        if self.head.data == remove_data:
+            self.head = self.head.next
+        else:
+            temp = self.head
+            while temp is not None:
+                if temp.data==remove_data:
+                    break
+                previousData = temp #skiping remove_data
+                temp = temp.next
+            if temp!=None:
+                previousData.next = temp.next  #modifiying previous node(steve) as temp node(edge)
+
+            else:
+                print('The Given Name:',remove_data,'is Invalid')
+                print('---------')
+                
+        
+    def __init__(self):
+        self.head = None
+
+    def show(self):
+        temp = self.head
+        tail = self.tail
+        while temp is not None:
+            print(temp.data)
+            temp = temp.next
+        print(tail.data)
+        
+N1 = link_list()
+N1.head = Node('Goldberg')
+N2 = Node('Rock')
+N3 = Node('Steve Austin')
+N4 = Node('Triple H')
+N5 = Node('Rey Mysterio')
+
+N1.head.next = N2
+N2.next = N3
+N3.next = N4
+N4.next = N5
+
+N1.insert_head('Brock Lesnar')
+N1.insert_mid(N3,'Edge')
+N1.tail = Node('John Cena')
+N1.remove('C M punk')
+
+N1.remove('Triple H')
+N1.show()
